@@ -35,7 +35,13 @@ namespace Lessons.OperationSystems.Scripts.Scheduler
                 meanTurnaroundTime += (scheduled[i].ExecutionTime * (scheduled.Length - i))-scheduled[i].ArrivalTime;
                 if (i == 0)
                     continue;
-                averageWaitingTime += scheduled[i - 1].ExecutionTime;
+                
+                int processWaitTime = 0;
+                for (int j = 0; j < i; j++)
+                {
+                    processWaitTime += scheduled[j].ExecutionTime;
+                }
+                averageWaitingTime += processWaitTime;
             }
 
             meanTurnaroundTime /= scheduled.Length;
